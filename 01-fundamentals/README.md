@@ -488,7 +488,7 @@ const Image = () => (
 - whatever assets we place in public - instantly available
 - domain(localhost)/asset
 
-#### JSX - CSS (inline styles)
+#### JSX - CSS (inline styles)**
 
 - style prop
 - {} in JSX means going back to JS Land
@@ -496,6 +496,7 @@ const Image = () => (
 
 ```js
 const Author = () => (
+  // the inline style we are providing is a JS object i.e key value pairs
   <h4 style={{ color: '#617d98', fontSize: '0.75rem', marginTop: '0.5rem' }}>
     Jordan Moore
   </h4>
@@ -518,6 +519,7 @@ const Author = () => (
   reference the library docs and elements tab
 
 - alternative option
+  - creating a JS object and passing it as inline style
 
 ```js
 const Author = () => {

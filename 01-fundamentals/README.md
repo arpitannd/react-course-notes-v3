@@ -47,7 +47,7 @@ Find the Content Useful? [You can always buy me a coffee](https://www.buymeacoff
 - toggle sidebar CMD + B
 - shortcuts settings/keyboard shortcuts
 
-#### First Component
+#### First Component*
 
 ```js
 function Greeting() {
@@ -63,6 +63,7 @@ const Greeting = () => {
 
 - starts with capital letter
 - must return JSX (html)
+- must return only one element
 - always close tag <Greeting/>
 
 ##### Typical Component
@@ -84,12 +85,15 @@ index.js
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
+// component names must be capitalized
 function Greeting() {
   return <h2>My First Component</h2>;
 }
 
+// all the react components are appended in the root (div)*
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+// closing brackets is compulsory
 root.render(<Greeting />);
 ```
 
@@ -178,24 +182,32 @@ const Greeting = () => {
 };
 ```
 
-#### JSX Rules
+#### JSX Rules*
 
 - return single element (one parent element)
 
   - semantics section/article
   - Fragment - let's us group elements without adding extra nodes
-
+  - we can also wrap eveything in one div and return it
 ```js
 return <React.Fragment>...rest of the return</React.Fragment>;
 
-// shorthand
+// shorthand*
 
-return <>...rest of the return</>;
+return <>...rest of the return</>*;
+Example: 
+return (
+  <>
+    <h2>My First Component</h2>
+    <h1>Hello World</h1>
+  </>
+)
 ```
 
 - camelCase property naming convention
 
 ```js
+(don't worry about the code for now)
 return (
   <div tabIndex={1}>
     <button onClick={myFunction}>click me</button>
@@ -211,13 +223,16 @@ return (
 </div>
 ```
 
-- className instead of class
+- className instead of class**
 
 ```js
 return <div className='someValue'>hello</div>;
+return <div class='someValue'>hello</div> won't work
 ```
 
-- close every element
+- close every element**
+- some HTML tags like img, input don't have closing tag
+  - close those tags as well
 
 ```js
 return <img />;
@@ -247,7 +262,9 @@ function Greeting() {
 }
 ```
 
-#### Nest Components
+#### Nest Components**
+
+- Creating components and nesting them inside a different component
 
 ```js
 function Greeting() {
@@ -258,6 +275,16 @@ function Greeting() {
     </div>
   );
 }
+
+/* we can also do -
+function Greeting() {
+    return (
+        <>
+           <Person/>
+           <Message/>
+        </>
+    );
+} */
 
 const Person = () => <h2>john doe</h2>;
 const Message = () => {

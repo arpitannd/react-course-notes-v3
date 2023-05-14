@@ -298,7 +298,7 @@ const Message = () => {
 - more tools/extensions
 - open chrome web store
 
-#### Book List
+#### Book List - Assignment**
 
 - setup structure
 
@@ -320,6 +320,7 @@ function BookList() {
 const Book = () => {
   return (
     <article>
+      // don't forget to close the image tag
       <Image />
       <Title />
       <Author />
@@ -339,9 +340,7 @@ root.render(<BookList />);
 ```
 
 - in search engine type - 'amazon best selling books'
-  [Amazon Best Sellers](https://www.amazon.com/Best-Sellers-Books/zgbs/books/)
-- DON'T NEED TO BUY ANYTHING !!!
-- NOT AN AFFILIATE LINK !!!!
+- [Amazon Best Sellers](https://www.amazon.com/Best-Sellers-Books/zgbs/books/)
 - choose a book
 - copy image, title and author
 
@@ -386,7 +385,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<BookList />);
 ```
 
-#### CSS
+#### CSS*
 
 - create index.css in src
 
@@ -405,7 +404,7 @@ body {
 }
 ```
 
-- import file and add classes
+- import file and add classes**
 
 ```js
 import './index.css';

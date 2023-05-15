@@ -478,6 +478,8 @@ const Book = () => {
 - rename (optional)
 - replace url in the src - './images/imageName.extension'
 - './' because assets are on the same server
+- we can access those asset on the local host
+  - for example: http://localhost:3000/images/book-1.jpg
 
 ```js
 const Image = () => (
@@ -496,7 +498,9 @@ const Image = () => (
 
 ```js
 const Author = () => (
-  // the inline style we are providing is a JS object i.e key value pairs
+   /* the inline style we are providing is a JS object i.e key value pairs
+   it is not a special react syntax 
+   we can create these JS objects outside and provide a reference to it */
   <h4 style={{ color: '#617d98', fontSize: '0.75rem', marginTop: '0.5rem' }}>
     Jordan Moore
   </h4>
@@ -566,11 +570,12 @@ const Book = () => {
 
 - {} in JSX means going back to JS Land
 - value inside must be an expression (return value),
-  can't be a statement
+  can't be a statement like <p>{let x = 6></p>
 
 ```js
 const author = 'Jordan Moore';
 const Book = () => {
+  /* creating a JS variable and using it instead of hard coding */
   const title = 'Interesting Facts For Curious Mindssssss';
   return (
     <article className='book'>
@@ -581,8 +586,9 @@ const Book = () => {
       <h2>{title}</h2>
 
       <h4>{author.toUpperCase()} </h4>
-      {/* <p>{let x = 6}</p> */}
+      {/* <p>{let x = 6}</p> - invalid */}
       <p>{6 + 6}</p>
+      {console.log(author)}
     </article>
   );
 };
@@ -634,7 +640,7 @@ const Book = (props) => {
     <article className='book'>
       <img src={img} alt={title} />
       <h2>{title}</h2>
-      <h4>{author} </h4>
+      <h4>{author}</h4>
       {console.log(props)}
     </article>
   );
@@ -642,7 +648,6 @@ const Book = (props) => {
 ```
 
 - props object, convention to call props, 'shakeAndBake' is an excellent alternative
-
 - pass as key/value pairs
 - if the prop exists it will return value, otherwise no value
 
@@ -650,6 +655,13 @@ const Book = (props) => {
 function BookList() {
   return (
     <section className='booklist'>
+      /** 
+         props are arguments passed into React components. Props are passed to components via HTML attributes. 
+         now in book component when we do {props.job} it looks for job argument and once found it does the work as
+         described in the Book component (which is to print 'developer' since <p> tag)
+         -> first Book component prints developer only since title and number are not passed
+         -> second book component prints title and number only.
+      **/
       <Book job='developer' />
       <Book title='random title' number={22} />
     </section>
@@ -662,6 +674,7 @@ const Book = (props) => {
       <img src={img} alt={title} />
       <h2>{title}</h2>
       <h4>{author} </h4>
+      /* when this book component is passed to BookList these  */
       <p>{props.job}</p>
       <p>{props.title}</p>
       <p>{props.number}</p>
@@ -671,6 +684,7 @@ const Book = (props) => {
 ```
 
 ```js
+/* the proper code */
 function BookList() {
   return (
     <section className='booklist'>
@@ -684,6 +698,7 @@ const Book = (props) => {
   return (
     <article className='book'>
       <img src={props.img} alt={props.title} />
+      /* note how we need to use props.arg */
       <h2>{props.title}</h2>
       <h4>{props.author} </h4>
     </article>
@@ -691,8 +706,8 @@ const Book = (props) => {
 };
 ```
 
-#### Props - Somewhat Dynamic Setup
-
+#### Props - Somewhat Dynamic Setup*
+- using object as attribute to pe bassed in Book()
 - setup an object
 - refactor vars to properties
 - copy/paste and rename
@@ -779,7 +794,7 @@ const Book = (props) => {
 };
 ```
 
-- destructure in function parameters (in our case props)
+- destructure in function parameters (in our case props)*
 - if you have console.log(props) - it won't be defined
 
 ```js
@@ -794,9 +809,11 @@ const Book = ({ img, title, author }) => {
 };
 ```
 
-#### Children Prop
+#### Children Prop**
 
 - everything we render between component tags
+- suppose we have 3 books and in one of these 3 books we want to do something different (say adding a paragraph and a button)
+  - in that case we use children props.
 - during the course we will mostly use it Context API
 - special prop, has to be "children"
 - can place anywhere in JSX
@@ -829,6 +846,7 @@ const Book = ({ img, title, author, children }) => {
   // rest of the logic
 };
 const Book = (props) => {
+  /* note how we are including a children variable as well */
   const { img, title, author, children } = props;
   console.log(props);
   return (
@@ -836,6 +854,7 @@ const Book = (props) => {
       <img src={img} alt={title} />
       <h2>{title}</h2>
       <h4>{author} </h4>
+      /* if a children is passed then only it will be rendered */
       {children}
     </article>
   );
